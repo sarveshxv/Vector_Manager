@@ -1,0 +1,2 @@
+To deploy first remove "db.sqlite3" from .gitignore and re-push it
+
