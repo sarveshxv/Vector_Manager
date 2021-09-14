@@ -1,0 +1,5 @@
+git branch -M main
+
+git remote add origin https://github.com/SarveshGupta15/Vector_Manager.git
+
+git push -u origin main
