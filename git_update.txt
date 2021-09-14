@@ -6,8 +6,6 @@ git status
 
 git commit -m "xyz"
 
-
-
 git branch -M main
 
 git remote add origin https://github.com/SarveshGupta15/Vector_Manager.git
