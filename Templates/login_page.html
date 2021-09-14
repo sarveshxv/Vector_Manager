@@ -1,0 +1,52 @@
+{% include 'cdn_lines.html' %}
+<html>
+<head>
+    <title>Login | Own Manager</title>
+    {% load static %}
+    <link type="icon/png" rel="shortcut icon" href="{% static 'icons/favicon32.png' %}">
+
+    <style>
+    .top-navbar{
+        margin: 6px 6px 24px 6px;
+        max-height: 60px;
+        min-height: 60px;
+        border-left: 4px #963596 solid;
+    }
+    </style>
+
+</head>
+<body style="background-color: #303030; color: #fff;">
+
+    <nav class="navbar top-navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{% url 'accounts_list' %}">Own Manager</a>
+        <a class="navbar-brand" href="{% url 'signup_page' %}">Sign Up</a>
+    </div>
+    </nav>
+
+    <div class="container" style="margin-top: 20%">
+    <div class="row justify-content-md-center">
+        <div class="col col-md-auto">
+            <center>
+            <form method="POST">
+            {% csrf_token %}
+
+                <input type="text" name="username" placeholder="Username">
+                <br>
+                <br>
+                <input type="text" name="password" placeholder="Password">
+                <br>
+                <br>
+
+                <input type="submit" value="Login" class="btn btn-outline-success">
+
+            </form>
+            </center>
+        </div>
+    </div>
+    </div>
+
+    {% include 'alert_messages.html' %}
+
+</body>
+</html>

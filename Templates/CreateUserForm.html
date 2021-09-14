@@ -1,0 +1,177 @@
+<html>
+<head>
+    <title>Become a Member | Own Manager</title>
+    {% include 'cdn_lines.html' %}
+
+    <style>
+    .top-navbar{
+        margin: 6px 6px 24px 6px;
+        max-height: 60px;
+        min-height: 60px;
+        border-left: 4px #963596 solid;
+    }
+    .navbar{
+    margin: 8px;
+    border-left: #083341 solid 3px;
+    border-radius: 2px;
+    }
+    form{
+        {% comment %} border: black 1px solid; {% endcomment %}
+        margin-top: 12px;
+    }
+    .continue_input{
+        margin-top: 18px;
+    }
+    #ci1{
+        margin-left: -12px;
+        font-weight: 500;
+        color: #0F5262;
+    }
+    #ci2{
+        background: #083341;
+        color: aliceblue;
+    }
+    </style>
+
+</head>
+<body>
+
+    {% load svg %}
+    {% load static %}
+    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet">
+
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accounts_list' %}">
+            {% svg 'Vector_text_n_logo_svg' %}
+            </a>
+            <a style="color: #083341; border: #083341 1px solid;" class="navbar-brand btn" href="{% url 'login_page' %}">
+                Login
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+    <div class="row justify-content-center">
+        <div class="col col-xs-7 col-sm-7 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
+            <form id="form" method="POST">
+            {% csrf_token %}
+                    <!-- Username -->
+                    <div id="error"></div>
+                    <label for="exampleInputlusername1" class="form-label">Username</label>
+                    <input type="text" class="form-control"
+                            id="ex_un"
+                            pattern="^[a-zA-Z1-9_.]{6,15}$"
+                            title="Username should be 6 to 15 characters long and can contains only letters, numbers, underscores and period." 
+                            name="username"
+                            required>
+                            <script>
+                            var input = document.getElementById("ex_un");
+                            input.oninvalid = function(event) {
+                                event.target.setCustomValidity("Username should be 6 to 15 characters long and can contains only letters, numbers, underscores and period.");
+                                // if (input.value.length < 6){
+                                // event.target.setCustomValidity("Username should be 6 to 15 characters long");
+                                // }
+                                // else {
+                                //     event.target.setCustomValidity("Username can only use letters, numbers, underscores and periods");
+                                // }
+                            }
+                            </script>
+    
+
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="ex_p1" name="password1" required>
+                
+                    <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="ex_p2" name="password2" required>
+                    <h1></h1>
+                
+                    
+                
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control" id="ex_em" name="email" aria-describedby="emailHelp" required>
+                    <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+                    
+                    {% include 'alert_messages.html' %}
+                    
+                    <div class="continue_input">
+                    <a id="ci1" class="btn">Log in instead</a>                
+                    <input id="ci2" type="submit" value="Continue" class="btn" style="float: right;">
+                    </div>
+                <script>
+                    let p1 = document.querySelector('#ex_p1');
+                    let p2 = document.querySelector('#ex_p2');
+                    let result = document.querySelector('h1');
+                
+                    function ck(){
+                        result.innerText = p1.value == p2.value ? 'Matching' : 'Not Matching';
+                    }
+                
+                    p1.addEventListener('keyup', () => {
+                        if (p2.value.length != 0) ck();
+                    })
+                
+                    p2.addEventListener('keyup', ck);
+                </script>
+
+            </form>
+
+        </div>
+    </div>
+    </div>
+
+
+</body>
+<script>
+    const name = document.getElementById("ex_un")
+    const form = document.getElementById("form")
+    const errorElement = document.getElementById("error")
+
+    form.addEventListner('submit', (e) => {
+        let messages = []
+        if (name.value === '' || name.value == null) {
+            messages.push("Username is Required")
+            break;
+        }
+        if (messages.length > 0) {
+            e.preventDefault()
+            errorElement.innerText = messages.join(', ')
+            break;
+        }
+    })
+</script>
+
+</html>
+<!-- 
+{% comment %} First Name {% endcomment %}
+{% comment %} <div class="mb-12"> {% endcomment %}
+    <label for="exampleInputfname1" class="form-label">First Name</label>
+    <input type="text" class="form-control" id="exampleInputfname1" name="fname">
+{% comment %} </div> {% endcomment %}
+{% comment %} Last Name {% endcomment %}
+<div class="mb-12">
+    <label for="exampleInputlname1" class="form-label">Last Name</label>
+    <input type="text" class="form-control" id="exampleInputlname1" name="lname">
+</div> -->
+
+
+
+                    <!-- Username
+                    <label for="exampleInputlusername1" class="form-label">Username</label>
+                    <input type="text" class="form-control"
+                            id="ex_username"
+                            name="username"
+                            pattern=".{6,15}"
+                            title="Username should be 6 to 15 characters long"
+                            required>
+                    <script>
+                        var input = document.getElementById("ex_username");
+                        input.oninvalid = function(event) {
+                            event.target.setCustomValidity("Username should be 6 to 15 characters long");
+                        }
+                    </script> -->
+
+
+
+                    <!-- pattern="^(?=.{6,20}$)[a-zA-Z0-9_.\s]*"  -->

@@ -1,0 +1,58 @@
+<html>
+<head>
+    <title>Modify Account | Own Manager</title>
+    {% include 'cdn_lines.html' %}
+    {% load static %}
+    <link href="{% static 'styles/modify_account_page.css' %}" rel="stylesheet">
+</head>
+    {% include "base.html" %}
+<body>
+<div class="container-fluid">
+    <div class="row"> 
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-4 col-xxl-3 mx-auto">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="card">
+                <ul class="list-group list-group-flush">
+
+                    <li class="fieldWrapper list-group-item">
+                    <button class="btn btn-outline-danger"><a href="{% url 'delete_account' account.id   %}">Delete</a></button>
+                    </li>
+
+                    <li class="fieldWrapper list-group-item">
+                        <label for="id_platform">Platform:</label><br>
+                        <input id="id_platform" class="form-control" type="text" name="platform" maxlength="30" value="{{ form.platform.value }}">  
+                    </li>
+
+                    <li class="fieldWrapper list-group-item">
+                        <label for="id_username">Username:</label><br>
+                        <input id="id_username" class="form-control" type="text" name="username" maxlength="25" value="{{ form.username.value }}">  
+                    </li>
+
+                    <li class="fieldWrapper list-group-item">
+                        <label for="id_password">Password:</label><br>
+                        <input id="id_password" class="form-control" type="text" name="password" maxlength="30" value="{{ form.password.value }}">
+                    </li>
+
+                    <li class="fieldWrapper list-group-item">
+                        <label for="id_email">Email:</label><br>
+                        <input id="id_email" class="form-control" type="email" name="email" value="{{ form.email.value }}">  
+                    </li>
+
+                    <li class="fieldWrapper list-group-item">
+                        <label for="id_mobile">Mobile:</label><br>
+                        <input id="id_mobile" class="form-control" type="tel" name="mobile" pattern="[0-9]{10}" value="{{ form.mobile.value }}">  
+                    </li>
+                    
+                    <li class="fieldWrapper list-group-item">
+                    <input type="submit" value="Update" class="btn btn-outline-info">
+                    <input type="reset" value="Cancel" class="btn btn-outline-secondary">
+                    </li>
+                </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

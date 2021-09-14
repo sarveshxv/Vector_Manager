@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include "cdn_lines.html" %}
+
+
+</head>
+<body>
+  <form id="form" method="POST">
+    {% csrf_token %}
+            <!-- Username -->
+            <div id="error"></div>
+            <label for="exampleInputlusername1" class="form-label">Username</label>
+            <input type="text" id="ex_un" name="username" class="form-control" >
+
+
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input type="password" class="form-control" id="ex_p1" name="password1">
+        
+            <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="ex_p2" name="password2">
+            <h1></h1>
+            
+        
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="ex_em" name="email" aria-describedby="emailHelp">
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+            
+            {% include 'alert_messages.html' %}
+            
+            <div class="continue_input">
+            <a id="ci1" class="btn">Log in instead</a>                
+            <input id="ci2" type="submit" value="Continue" class="btn" style="float: right;">
+            </div>
+    </form>
+</body>
+        <script>
+            let p1 = document.querySelector('#ex_p1');
+            let p2 = document.querySelector('#ex_p2');
+            let result = document.querySelector('h1');
+        
+            function ck(){
+                result.innerText = p1.value == p2.value ? 'Matching' : 'Not Matching';
+            }
+        
+            p1.addEventListener('keyup', () => {
+                if (p2.value.length != 0) ck();
+            })
+        
+            p2.addEventListener('keyup', ck);
+</script>  
+</html> 

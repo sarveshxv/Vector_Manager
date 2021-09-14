@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    {% include 'cdn_lines.html' %}
+    {% load static %}
+{#    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap_cdn.css' %}">#}
+    <link rel="shortcut icon" type="icon/png" href="{% static 'icons/favicon32.png' %}">
+
+</head>
+<body>
+{% include 'navbar.html' %}
+
+{% block content %}
+
+{% endblock %}
+</body>
+</html>

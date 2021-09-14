@@ -1,0 +1,56 @@
+{#{% block content %}#}
+{#    <style>#}
+{#        .top-navbar{#}
+{#            margin: 6px 6px 24px 6px;#}
+{#            max-height: 60px;#}
+{#            min-height: 60px;#}
+{#            border-left: 4px #963596 solid;#}
+{#        }#}
+{#        .nav-right{#}
+{#            color: white;#}
+{#        }#}
+{#    </style>#}
+{##}
+{#  <nav class="navbar top-navbar navbar-expand-lg navbar-dark bg-dark">#}
+{#    <div class="container-fluid">#}
+{#      <a class="navbar-brand" >Own Manager</a>#}
+{#        <div class="navbar-brand">#}
+{#            <a class="nav-right" href="">Add</a>&ensp;#}
+{#            <a class="nav-right" href="">Logout</a>#}
+{#        </div>#}
+{##}
+{#    </div>#}
+{#  </nav>#}
+{##}
+{#{% endblock %}#}
+
+{% block content %}
+    {% load svg %}
+    {% load static %}
+    <link href="{% static 'styles/navbar.css' %}" rel="stylesheet">
+
+
+    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'accounts_list' %}">
+            {% svg 'Vector_text_n_logo_svg' %}
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link" href="{% url 'add_account' %}">
+                        {% svg 'Add_account' %}
+                       Add Account
+                    </a>
+                    <a class="nav-link" href="{% url 'logout_page' %}">
+                        {% svg 'Logout_svg' %}
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+{% endblock %}
