@@ -4,11 +4,25 @@
     {% load static %}
     <link href="{% static 'styles/accounts_list.css' %}" rel="stylesheet">
 
-    {% include 'alert_messages.html' %}
+    
     
     <div class="container">
     <div class="row">
     <div class="col-md-12 col-lg-10 col-xl-8 col-xxl-7 mx-auto">
+
+            <div style="border-bottom: 3px solid #0F5262;
+            border-radius: 3px;
+            margin-top: 24px;
+            margin-bottom: 36px;
+            font-size: 48px;
+            font-weight: 500;
+            text-align: left;
+            color: #083341;">
+            Cards
+            </div>
+
+            {% include 'alert_messages.html' %}
+            
             {% for account in accounts %}
             <div class="card" id="card">
                 <div class="card-header" id="card-head">

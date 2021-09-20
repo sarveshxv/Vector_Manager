@@ -2,13 +2,30 @@ from django import forms
 from django.shortcuts import HttpResponse, render, redirect, get_object_or_404, Http404, HttpResponseRedirect
 from .models import Account
 from django.contrib.auth.models import User
-from .forms import AddAccountForm, CreateUserForm, ModifyAccountForm, RegisterForm
+from .forms import AddAccountForm, CreateUserForm, ModifyAccountForm, RegisterForm, UserEditForm
 from django.contrib.auth import login, logout, authenticate, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 
 User = get_user_model()
+
+
+def profile(request):
+    if request.method == "POST":
+        form = UserEditForm(data=request.POST or None, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+        else:
+            messages.warning(request, 'Provide Proper Data...')
+            return redirect('profile')
+    else:
+        form = UserEditForm(instance=request.user)
+        context = {
+            'form': form,
+        }
+        return render(request, 'profile.html', context)
 
 
 @login_required(login_url='login_page')
@@ -23,7 +40,7 @@ def accounts_list(request):
 @login_required(login_url='login_page')
 def add_account(request):
     if request.method == 'POST':
-        form = AddAccountForm(request.POST)
+        form = AddAccountForm(request.POST)          
         if form.is_valid:
             account = form.save(commit=False)
             account.belongs_to_id = request.user.id
@@ -80,7 +97,7 @@ def modify_account(request, id):
             data = form.save(commit=False)
             data.platform_slug = data.platform.replace(' ', '-')
             data.save()
-            messages.success(request, f"{data.platform} data updated")
+            messages.success(request, f"{data.platform.title()} data updated")
             return redirect('accounts_list')
         else:   # invalid form
             messages.error(request, f"Failed to Update")
@@ -102,6 +119,41 @@ def delete_account(request, id):
 
 def tryy(request):
     return render(request, 'tryy.html')
+
+
+def signup_page(request):
+    empty_form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('accounts_list')
+    else:
+        if request.method == 'POST':
+            # fname = request.POST.get("fname")
+            # lname = request.POST.get("lname")
+            username = request.POST.get("username")
+            password = request.POST.get("password1")
+            # password2 = request.POST.get("password2")
+            email = request.POST.get("email")
+            qs = User.objects.filter(username__iexact = username)
+            if qs.exists():
+                messages.warning(request, f"Username Already Exist")
+                return render(request, 'CreateUserForm.html', {'form': empty_form})
+            else:
+                xuser = User.objects.create_user(username.lower(), email, password)
+                messages.success(request, f"Thank You {xuser.username.title()} for joining us")
+                return redirect('accounts_list')
+
+
+            # if form.is_valid():
+            #     user = form.save(commit=False)
+            #     user.username = user.username.lower()
+            #     user.save()
+            #     messages.success(request, f"Thank You {user.username.title()} for joining us")
+            #     return redirect('accounts_list')
+            # else:
+            #     messages.error(request, f"Please provide proper information")
+            #     return render(request, 'CreateUserForm.html', {'form': empty_form})
+        else:
+            return render(request, 'CreateUserForm.html', {'form': empty_form})
 
 
 def Xsignup_page(request):
@@ -144,38 +196,3 @@ def Xregister_view(request):
         else:  # Wrong Password or Username
             messages.warning(request, 'Invalid Username or Password')
             return render(request, 'login_page.html')
-
-
-def signup_page(request):
-    empty_form = CreateUserForm()
-    if request.user.is_authenticated:
-        return redirect('accounts_list')
-    else:
-        if request.method == 'POST':
-            fname = request.POST.get("fname")
-            lname = request.POST.get("lname")
-            username = request.POST.get("username")
-            password = request.POST.get("password1")
-            password2 = request.POST.get("password2")
-            email = request.POST.get("email")
-            qs = User.objects.filter(username__iexact = username)
-            if qs.exists():
-                messages.warning(request, f"Username Already Exist")
-                return render(request, 'CreateUserForm.html', {'form': empty_form})
-            else:
-                xuser = User.objects.create_user(username.lower(), email, password)
-                messages.success(request, f"Thank You {xuser.username.title()} for joining us")
-                return redirect('accounts_list')
-
-
-            # if form.is_valid():
-            #     user = form.save(commit=False)
-            #     user.username = user.username.lower()
-            #     user.save()
-            #     messages.success(request, f"Thank You {user.username.title()} for joining us")
-            #     return redirect('accounts_list')
-            # else:
-            #     messages.error(request, f"Please provide proper information")
-            #     return render(request, 'CreateUserForm.html', {'form': empty_form})
-        else:
-            return render(request, 'CreateUserForm.html', {'form': empty_form})

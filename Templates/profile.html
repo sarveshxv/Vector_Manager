@@ -1,10 +1,19 @@
-{% extends 'base.html' %}
-{% block content %}
-    <title>Add Account</title>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    {% include 'cdn_lines.html' %}
+</head>
+<body>
+    {% include 'navbar.html' %}
 
     <div class="container-fluid">
         <div class="row"> 
             <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-4 col-xxl-3 mx-auto">
+                
                 <div style="border-bottom: 3px solid #0F5262;
                 border-radius: 3px;
                 margin-top: 24px;
@@ -13,37 +22,40 @@
                 font-weight: 500;
                 text-align: left;
                 color: #083341;">
-                Add Card
+                Profile
                 </div>
+
+                {% include 'alert_messages.html' %}
+
                 <form method="POST">
                     {% csrf_token %}
                     <div class="card">
                     <ul class="list-group list-group-flush">
     
                         <li class="fieldWrapper list-group-item">
-                            <label for="id_platform">Platform: </label><br>
-                            <input id="id_platform" class="form-control" type="text" name="platform" maxlength="30" required>  
+                            <label for="id_platform">First Name: </label><br>
+                            <input id="id_platform" class="form-control" type="text" name="first_name" maxlength="30" value="{{ form.first_name.value }}">  
                         </li>
     
                         <li class="fieldWrapper list-group-item">
-                            <label for="id_username">Username:</label><br>
-                            <input id="id_username" class="form-control" type="text" name="username" maxlength="25">  
+                            <label for="id_username">Last Name:</label><br>
+                            <input id="id_username" class="form-control" type="text" name="last_name" maxlength="25" value="{{ form.last_name.value }}">  
                         </li>
     
                         <li class="fieldWrapper list-group-item">
-                            <label for="id_password">Password:</label><br>
-                            <input id="id_password" class="form-control" type="text" name="password" maxlength="30" required>
+                            <label for="id_password">Username:</label><br>
+                            <input id="id_password" class="form-control" type="text" name="username" maxlength="30" value="{{ form.username.value }}">
                         </li>
     
                         <li class="fieldWrapper list-group-item">
                             <label for="id_email">Email:</label><br>
-                            <input id="id_email" class="form-control" type="email" name="email">  
+                            <input id="id_email" class="form-control" type="email" name="email" value="{{ form.email.value }}">  
                         </li>
     
-                        <li class="fieldWrapper list-group-item">
+                        <!-- <li class="fieldWrapper list-group-item">
                             <label for="id_mobile">Mobile:</label><br>
-                            <input id="id_mobile" class="form-control" type="tel" name="mobile" pattern="[0-9]{10}">  
-                        </li>
+                            <input id="id_mobile" class="form-control" type="tel" name="mobile" pattern="[0-9]{10}" value="{{ form.mobile.value }}">  
+                        </li> -->
                         
                         <li class="fieldWrapper list-group-item">
                         <input type="submit" value="Update" class="btn btn-outline-info">
@@ -55,4 +67,6 @@
             </div>
         </div>
     </div>    
-{% endblock %}
+
+</body>
+</html>
