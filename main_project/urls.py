@@ -20,7 +20,8 @@ Including another URLconf
 #     path('admin/', admin.site.urls),
 # ]
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+# from django.urls.conf import include
 from credentials_app import views
 
 
@@ -35,4 +36,5 @@ urlpatterns = [
     path('delete_account/<int:id>', views.delete_account, name='delete_account'),
     path('profile', views.profile, name='profile'),
     path('try', views.tryy),
+    path('auth_accounts/', include('allauth.urls')),
 ]

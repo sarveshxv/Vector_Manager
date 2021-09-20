@@ -1,3 +1,4 @@
+{% load socialaccount %}
 {% include 'cdn_lines.html' %}
 <html>
 <head>
@@ -33,6 +34,15 @@
     }
     .xbuttons{
         padding-top: 10px;
+    }
+    .google-btn{
+        margin-top: 6px;
+        /* border: 1px solid #083341; */
+        background-color: rgba(08, 33, 41, 0.2);
+    }
+    .google-btn:hover{
+        background-color: rgba(08, 33, 41, 0.9);
+        color: seashell;
     }
     </style>
 
@@ -72,6 +82,7 @@
                     <div class="xbuttons">
                     <a href="#" class="ci2 btn">Create Account</a>
                     <input type="submit" value="Login" class="btn btn-login">
+                    <a href="{% provider_login_url 'google' %}" class="form-control btn google-btn">or Login with Google</a>
                     </div>
                 </form>
 
