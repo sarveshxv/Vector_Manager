@@ -1,9 +1,26 @@
 .list-group-item a{
     text-decoration: none;
 }
-.list-group-item button a{
+
+
+.delete-card-btn a{
     color: red;
 }
-form{
-    border: 2px solid;
+.delete-card-btn a:hover{
+    color: white;
+}
+
+
+.cancel-update-btn a{
+    color: black;
+    opacity: 90%;
+}
+.cancel-update-btn a:hover{
+    color: black;
+    opacity: 90%;
+}
+
+
+.update-card-btn{
+    float: right;
 }

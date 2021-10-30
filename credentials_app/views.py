@@ -12,20 +12,24 @@ User = get_user_model()
 
 
 def profile(request):
+    return render(request, 'profile.html')
+
+def edit_profile(request):
     if request.method == "POST":
         form = UserEditForm(data=request.POST or None, instance=request.user)
         if form.is_valid():
             form.save()
+            messages.success(request, 'Profile Updated')
             return redirect('profile')
         else:
             messages.warning(request, 'Provide Proper Data...')
-            return redirect('profile')
+            return redirect('edit_profile')
     else:
         form = UserEditForm(instance=request.user)
         context = {
             'form': form,
         }
-        return render(request, 'profile.html', context)
+        return render(request, 'edit_profile.html', context)
 
 
 @login_required(login_url='login_page')

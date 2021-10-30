@@ -16,7 +16,6 @@
     border-radius: 2px;
     }
     form{
-        {% comment %} border: black 1px solid; {% endcomment %}
         margin-top: 12px;
     }
     .continue_input{
@@ -43,7 +42,7 @@
 
     <nav class="navbar navbar-expand-sm navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{% url 'accounts_list' %}">
+            <a class="navbar-brand" href="{% url 'login_page' %}">
             {% svg 'Vector_text_n_logo_svg' %}
             </a>
             <a style="color: #083341; border: #083341 1px solid;" class="navbar-brand btn" href="{% url 'login_page' %}">
@@ -54,7 +53,7 @@
 
     <div class="container">
     <div class="row justify-content-center">
-        <div class="col col-xs-7 col-sm-7 col-md-6 col-lg-4 col-xl-3 col-xxl-3">
+        <div class="col-10 col-sm-8 col-md-6 col-lg-4 col-xl-4 col-xxl-3 mx-auto">
                <div style="border-bottom: 3px solid #0F5262;
                 border-radius: 3px;
                 margin-top: 24px;
@@ -67,8 +66,10 @@
                 </div>
             <form id="form" method="POST">
             {% csrf_token %}
-                    <!-- Username -->
+
                     <div id="error"></div>
+                    
+                    <div class="form-group">
                     <label for="exampleInputlusername1" class="form-label">Username</label>
                     <input type="text" class="form-control"
                             id="ex_un"
@@ -88,34 +89,42 @@
                                 // }
                             }
                             </script>
-    
-
+                        </div>
+                    
+                    <div class="form-group">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
                     <input type="password" class="form-control" id="ex_p1" name="password1" required>
-                
+                    </div>
+                <div class="form-row">
                     <label for="exampleInputPassword2" class="form-label">Confirm Password</label>
-                    <input type="password" class="form-control" id="ex_p2" name="password2" required>
-                    <h1></h1>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="ex_p2" name="password2" required>
+                            <div class="input-group-postpend">
+                                <div class="input-group-text txt_h" style="height: 100%;"></div>
+                              </div>
+                    </div>  
+                </div>              
                 
-                    
-                
+
+
+                    <div class="form-group">                
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="ex_em" name="email" aria-describedby="emailHelp" required>
                     <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
-                    
+                    </div>
                     {% include 'alert_messages.html' %}
                     
                     <div class="continue_input">
-                    <a id="ci1" class="btn">Log in instead</a>                
+                    <a id="ci1"  href="{% url 'login_page' %}" class="btn">Log in instead</a>                
                     <input id="ci2" type="submit" value="Continue" class="btn" style="float: right;">
                     </div>
                 <script>
                     let p1 = document.querySelector('#ex_p1');
                     let p2 = document.querySelector('#ex_p2');
-                    let result = document.querySelector('h1');
+                    let result = document.querySelector('.txt_h');
                 
                     function ck(){
-                        result.innerText = p1.value == p2.value ? 'Matching' : 'Not Matching';
+                        result.innerText = p1.value == p2.value ? '✔' : '✖';
                     }
                 
                     p1.addEventListener('keyup', () => {

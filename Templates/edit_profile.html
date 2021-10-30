@@ -4,31 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
+    <title>Edit Profile</title>
     {% include 'cdn_lines.html' %}
-
-    <style>
-        .card{
-            margin: 6px;
-        }
-        .card:hover{
-            background: #0f5262;
-            color: white;
-        }
-        .profile-actions{
-            border-left: #0F5262 3px solid;
-        }
-        .profile-actions a{
-            color: #0f5262;
-        }
-        .profile-actions a:hover{
-            background: #0f5262;
-            color: white;
-        }
-    </style>
-
 </head>
-
 <body>
     {% include 'navbar.html' %}
 
@@ -44,34 +22,12 @@
                 font-weight: 500;
                 text-align: left;
                 color: #083341;">
-                Profile
+                Edit Profile
                 </div>
 
                 {% include 'alert_messages.html' %}
 
-                <div class="card">
-                    <ul class="list-group list-group-flush profile-actions">
-                        <a href="{% url 'edit_profile' %}" class="fieldWrapper list-group-item">
-                        Edit Profile
-                        </a>
-                    </ul>
-                </div>
-                <div class="card">
-                    <ul class="list-group list-group-flush profile-actions">
-                        <a href="{% url 'password_change' %}" class="fieldWrapper list-group-item">
-                        Change Password
-                        </a>
-                    </ul>
-                </div>
-                <div class="card">
-                    <ul class="list-group list-group-flush profile-actions">
-                        <a href="{% url 'password_reset' %}" class="fieldWrapper list-group-item">
-                        Reset Password
-                        </a>
-                    </ul>
-                </div>
-
-                {% comment %} <form method="POST">
+                <form method="POST">
                     {% csrf_token %}
                     <div class="card">
                     <ul class="list-group list-group-flush">
@@ -107,7 +63,7 @@
                         </li>
                     </ul>
                     </div>
-                </form> {% endcomment %}
+                </form>
             </div>
         </div>
     </div>    
