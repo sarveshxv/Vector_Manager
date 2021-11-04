@@ -1,3 +1,0 @@
-To deploy first remove "db.sqlite3" from .gitignore and re-push it
-
-django svgs https://snyk.io/advisor/python/django-inline-svg
