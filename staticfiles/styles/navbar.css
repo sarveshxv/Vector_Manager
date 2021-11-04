@@ -1,0 +1,15 @@
+.navbar{
+    margin: 8px;
+    border-left: #083341 solid 3px;
+    border-radius: 2px;
+}
+.nav-link{
+    margin: 6px;
+    border: 1px solid #083341;
+    border-radius: 4px;
+    padding-left: auto;
+}
+.navbar-nav .nav-link{
+    padding-left: 6px;
+    padding-right: 6px;
+}

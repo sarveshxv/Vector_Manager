@@ -1,7 +1,11 @@
 *.pyc
 /.vscode
 __pycache__
-db.sqlite3
 venv
 .env
+users.txt
+git_update.txt
+.gitignore
+reqs
+requirements.txt
 users.txt
